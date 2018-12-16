@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Gif Button</title>
+</head>
+
+<link rel="stylesheet" href="gif.css">
+
+<body>
+    <h1>GIF MANIA</h1>
+    <button id="gif-button">basketball</button>
+    <button id="gif-button2">soccer</button>
+    <button id="gif-button3">hockey</button>
+    <button id="gif-button4">tennis</button>
+    <div id="images">
+    </div>
+
+    <div id="buttons-view"></div>
+
+    <form id="topics-form">
+        <label for="topics-input">Whats your favorite sport?!</label>
+        <input type="text" id="topics-input"><br>
+
+        <!-- Button adds sport -->
+        <input id="add-sport" type="submit" value="Add a Sport">
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        var topics = [];
+
+
+        // Function for generating new sports
+        function renderButton() {
+
+
+            $("#buttons-view").empty();
+
+            // Looping through the array of sports
+            for (var i = 0; i < topics.length; i++) {
+
+                // Then generating buttons for each sport in the array
+                var a = $("<button>");
+                // Adding a class
+                a.addClass("sport");
+                // Added a data-attribute
+                a.attr("data-name", topics[i]);
+                // Provided the initial button text
+                a.text(topics[i]);
+                // Added the button to the HTML
+                $("#buttons-view").append(a);
+            }
+        }
+
+        // onclick add sport
+        $("#add-sport").on("click", function (event) {
+            event.preventDefault();
+
+            // gets input from textbox
+            var sport = $("#topics-input").val().trim();
+
+            // added sport is then added to our array
+            topics.push(sport);
+
+            renderButton();
+        });
+
+        $("#buttons-view").on("click", function () {
+
+            //pulls url from api for gifs
+            var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=4HcUr2cDhF5zrAyr57fWW2jnzLiXdWzY&tag=baseball";
+            
+            // ajax call to giphy
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+                // tells ajax what to do after getting image
+                .then(function (response) {
+
+                    // pulling img url from response 
+                    var imageUrl = response.data.image_original_url;
+
+                    // creating new image in jquery
+                    var gifImage = $("<img>");
+
+                    // update attr for img to be the img url from the response
+                    gifImage.attr("src", imageUrl);
+                    gifImage.attr("alt", "gif image");
+
+                    //prepends gif to page
+                    $("#images").prepend(gifImage);
+                });
+        });
+        
+        $("#gif-button").on("click", function () {
+
+var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=4HcUr2cDhF5zrAyr57fWW2jnzLiXdWzY&tag=basketball";
+
+
+$.ajax({
+    url: queryURL,
+    method: "GET"
+})
+    // tells ajax what to do after getting image
+    .then(function (response) {
+
+        // pulling img url from response 
+        var imageUrl = response.data.image_original_url;
+
+        // creating new image in jquery
+        var gifImage = $("<img>");
+
+        // update attr for img to be the img url from the response
+        gifImage.attr("src", imageUrl);
+        gifImage.attr("alt", "gif image");
+
+        //prepends gif to page
+        $("#images").prepend(gifImage);
+
+        
+    });
+
+    //pause and start gifs
+    
+    $("#gif-image").on("click", function() {
+      var state = $(this).attr("data-state");
+      var dataAnimate = $(this).attr("data-animate")
+      $(this).attr("src", dataAnimate);
+      $(this).attr("data-state","animate");
+
+      var dataStill = $(this).attr("data-still");
+
+      if (state=== "animate") {
+          $(this).attr("src", dataStill);
+          $(this).attr("data-state", "still");
+      }
+    });
+
+});
+
+        $("#gif-button2").on("click", function () {
+
+            var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=4HcUr2cDhF5zrAyr57fWW2jnzLiXdWzY&tag=soccer";
+
+
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+                // tells ajax what to do after getting image
+                .then(function (response) {
+
+                    // pulling img url from response 
+                    var imageUrl = response.data.image_original_url;
+
+                    // creating new image in jquery
+                    var gifImage = $("<img>");
+
+                    // update attr for img to be the img url from the response
+                    gifImage.attr("src", imageUrl);
+                    gifImage.attr("alt", "gif image");
+
+                    //prepends gif to page
+                    $("#images").prepend(gifImage);
+                });
+        });
+
+        $("#gif-button3").on("click", function () {
+
+var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=4HcUr2cDhF5zrAyr57fWW2jnzLiXdWzY&tag=hockey";
+
+
+$.ajax({
+    url: queryURL,
+    method: "GET"
+})
+    // tells ajax what to do after getting image
+    .then(function (response) {
+
+        // pulling img url from response 
+        var imageUrl = response.data.image_original_url;
+
+        // creating new image in jquery
+        var gifImage = $("<img>");
+
+        // update attr for img to be the img url from the response
+        gifImage.attr("src", imageUrl);
+        gifImage.attr("alt", "gif image");
+
+        //prepends gif to page
+        $("#images").prepend(gifImage);
+    });
+});
+
+$("#gif-button4").on("click", function () {
+
+var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=4HcUr2cDhF5zrAyr57fWW2jnzLiXdWzY&tag=tennis";
+
+
+$.ajax({
+    url: queryURL,
+    method: "GET"
+})
+    // tells ajax what to do after getting image
+    .then(function (response) {
+
+        // pulling img url from response 
+        var imageUrl = response.data.image_original_url;
+
+        // creating new image in jquery
+        var gifImage = $("<img>");
+
+        // update attr for img to be the img url from the response
+        gifImage.attr("src", imageUrl);
+        gifImage.attr("alt", "gif image");
+
+        //prepends gif to page
+        $("#images").prepend(gifImage);
+    });
+});
+    </script>
+
+</html>
